@@ -40,6 +40,7 @@ class Settings(TypedDict, total=False):
     style: Optional[List[Tuple[str, str]]]
     customize: CzSettings
     major_version_zero: bool
+    encoding: str
 
 
 name: str = "cz_conventional_commits"
@@ -51,6 +52,7 @@ config_files: List[str] = [
     ".cz.yaml",
     "cz.yaml",
 ]
+encoding: str = "utf-8"
 
 DEFAULT_SETTINGS: Settings = {
     "name": "cz_conventional_commits",
@@ -65,6 +67,7 @@ DEFAULT_SETTINGS: Settings = {
     "update_changelog_on_bump": False,
     "use_shortcuts": False,
     "major_version_zero": False,
+    "encoding": "utf-8",
 }
 
 MAJOR = "MAJOR"

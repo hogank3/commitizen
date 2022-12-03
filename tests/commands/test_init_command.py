@@ -61,7 +61,7 @@ def test_init_without_setup_pre_commit_hook(tmpdir, mocker: MockFixture, config)
     with tmpdir.as_cwd():
         commands.Init(config)()
 
-        with open("pyproject.toml", "r") as toml_file:
+        with open("pyproject.toml", "r", encoding="utf-8") as toml_file:
             config_data = toml_file.read()
         assert config_data == expected_config
 
@@ -144,7 +144,7 @@ def check_cz_config(config: str):
     Args:
         config: The config path
     """
-    with open(config, "r") as file:
+    with open(config, "r", encoding="utf-8") as file:
         if "json" in config:
             assert json.load(file) == EXPECTED_DICT_CONFIG
         elif "yaml" in config:

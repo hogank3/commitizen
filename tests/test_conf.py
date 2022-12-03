@@ -49,6 +49,7 @@ _settings = {
     "update_changelog_on_bump": False,
     "use_shortcuts": False,
     "major_version_zero": False,
+    "encoding": "utf-8",
 }
 
 _new_settings = {
@@ -65,6 +66,7 @@ _new_settings = {
     "update_changelog_on_bump": False,
     "use_shortcuts": False,
     "major_version_zero": False,
+    "encoding": "utf-8",
 }
 
 _read_settings = {
@@ -80,7 +82,7 @@ _read_settings = {
 def config_files_manager(request, tmpdir):
     with tmpdir.as_cwd():
         filename = request.param
-        with open(filename, "w") as f:
+        with open(filename, "w", encoding="utf-8") as f:
             if "toml" in filename:
                 f.write(PYPROJECT)
             elif "json" in filename:
@@ -137,7 +139,7 @@ class TestTomlConfig:
         toml_config = config.TomlConfig(data="", path=path)
         toml_config.init_empty_config_content()
 
-        with open(path, "r") as toml_file:
+        with open(path, "r", encoding="utf-8") as toml_file:
             assert toml_file.read() == "[tool.commitizen]\n"
 
     def test_init_empty_config_content_with_existing_content(self, tmpdir):
@@ -148,7 +150,7 @@ class TestTomlConfig:
         toml_config = config.TomlConfig(data="", path=path)
         toml_config.init_empty_config_content()
 
-        with open(path, "r") as toml_file:
+        with open(path, "r", encoding="utf-8") as toml_file:
             assert toml_file.read() == existing_content + "\n[tool.commitizen]\n"
 
 
@@ -158,5 +160,5 @@ class TestJsonConfig:
         json_config = config.JsonConfig(data="{}", path=path)
         json_config.init_empty_config_content()
 
-        with open(path, "r") as json_file:
+        with open(path, "r", encoding="utf-8") as json_file:
             assert json.load(json_file) == {"commitizen": {}}
