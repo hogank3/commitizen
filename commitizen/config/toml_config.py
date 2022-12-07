@@ -10,7 +10,6 @@ from .base_config import BaseConfig
 class TomlConfig(BaseConfig):
     def __init__(self, *, data: Union[bytes, str], path: Union[Path, str]):
         super(TomlConfig, self).__init__()
-        self.encoding = self.settings["encoding"]
         self.is_empty_config = False
         self._parse_setting(data)
         self.add_path(path)
